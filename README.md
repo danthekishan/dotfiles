@@ -14,7 +14,7 @@ This repo is built for [EndeavourOS](https://endeavouros.com/) / Arch Linux usin
   - `hyprland`: [Compositor](https://hyprland.org/)
   - `waybar`: [Bar](https://github.com/Alexays/Waybar)
   - `wofi`: [App Launcher](https://hg.sr.ht/~scoopta/wofi)
-  - `kitty`: [Terminal](https://sw.kovidgoyal.net/kitty/)
+  - `ghostty`: [Terminal](https://ghostty.org/)
 
 ---
 
@@ -23,9 +23,17 @@ This repo is built for [EndeavourOS](https://endeavouros.com/) / Arch Linux usin
 Make sure you have the following tools installed before running the setup:
 
 ```bash
+# Oh my zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+
 # Arch-based
-sudo pacman -S zsh hyprland wofi waybar stow git
+sudo pacman -S zsh hyprland wofi waybar stow git eza ghostty zellij lazygit
 yay -S hyprshot swaync hyprlock hypridle hyprpaper starship
+
+# fzf and fd
+sudo pacman -S fzf fd
 
 # gtk theme
 yay -S nwg-look
@@ -33,6 +41,7 @@ yay -Sy catppuccin-gtk-theme-mocha
 
 # fonts
 yay -S ttf-jetbrains-mono
+sudo pacman -S ttf-font-awesome ttf-nerd-fonts-symbols
 ```
 
 ## 🖼️ Showcase

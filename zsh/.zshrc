@@ -87,4 +87,4 @@ export NVM_DIR="$HOME/.nvm"
 ### SETTING THE STARSHIP PROMPT ###
 eval "$(starship init zsh)"
 
-. "$HOME/.local/bin/env"
+# . "$HOME/.local/bin/env"
