@@ -88,3 +88,29 @@ export NVM_DIR="$HOME/.nvm"
 eval "$(starship init zsh)"
 
 # . "$HOME/.local/bin/env"
+
+# Enable vi mode
+bindkey -v
+
+# Change the cursor shape for different vi modes
+function zle-keymap-select {
+  if [[ ${KEYMAP} == vicmd ]] ||
+     [[ $1 = 'block' ]]; then
+     echo -ne '\e[1 q' # Block cursor for normal mode
+  elif [[ ${KEYMAP} == main ]] ||
+       [[ ${KEYMAP} == viins ]] ||
+       [[ ${KEYMAP} = '' ]] ||
+       [[ $1 = 'beam' ]]; then
+       echo -ne '\e[5 q' # Beam cursor for insert mode
+  fi
+}
+
+zle -N zle-keymap-select
+
+zle-line-init() {
+  echo -ne "\e[5 q" # Beam cursor
+}
+zle -N zle-line-init
+
+# Fic backspace in vi mode
+bindkey "^?" backward-delete-char
