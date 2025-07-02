@@ -42,6 +42,12 @@ yay -Sy catppuccin-gtk-theme-mocha
 # fonts
 yay -S ttf-jetbrains-mono
 sudo pacman -S ttf-font-awesome ttf-nerd-fonts-symbols
+
+# Starting ssh agents
+systemctl --user enable ssh-agent
+systemctl --user start ssh-agent
+
+ssh-add ~/.ssh/...
 ```
 
 ## 🖼️ Showcase
