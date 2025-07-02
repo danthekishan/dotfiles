@@ -1,58 +1,74 @@
-@import "rosepine.css";
+/*
+* Enhanced Waybar CSS - Rosé Pine Theme
+* Based on your original styling with modern improvements
+*/
+
+/* Color definitions */
+@define-color base            #191724;
+@define-color surface         #1f1d2e;
+@define-color overlay         #26233a;
+@define-color muted           #6e6a86;
+@define-color subtle          #908caa;
+@define-color text            #e0def4;
+@define-color love            #eb6f92;
+@define-color gold            #f6c177;
+@define-color rose            #ebbcba;
+@define-color pine            #31748f;
+@define-color foam            #9ccfd8;
+@define-color iris            #c4a7e7;
+@define-color highlightLow    #21202e;
+@define-color highlightMed    #403d52;
+@define-color highlightHigh   #524f67;
+
+/* Critical and warning states */
+@define-color critical        @love;
+@define-color warning         @gold;
 
 * {
-  font-family: "JetBrainsMono Nerd Font", Roboto, Helvetica, Arial, sans-serif;
-  font-weight: bold;
-  font-size: 14px;
+  background: transparent;
+  font-family: "JetBrains Mono Nerd Font";
+  font-size: 10pt;
+  font-weight: 500;
 }
 
-/* Bar background */
 #waybar {
-  background-color: rgba(0, 0, 0, 0);
-  border: none;
-  box-shadow: none;
-  transition: background-color .5s;
+  background: rgba(25, 23, 36, 0.85);
+  border-radius: 15px;
+  margin: 10px 8px 8px 8px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  animation: fade-in 0.5s ease-out;
 }
 
-/* Workspaces, window title, and tray container */
-#workspaces,
-#window,
-#tray {
-  background-color: @base;
-  margin: 6px 4px 0 4px;   /* top 6px, sides 4px */
-  padding: 4px 6px;
+/* Main bar defaults */ /* {{{ */
+#waybar.main {
+  font-family: "JetBrains Mono Nerd Font";
+  font-size: 10pt;
+  font-weight: 500;
   border-radius: 10px;
 }
 
-/* Tighten up the tray icons */
-#tray > * {
-  margin: 0 4px;
-}
+#waybar.main button {
+  font-family: JetBrains Mono Nerd Font;
+  font-size: 10pt;
+  font-weight: 500;
+  transition: all 0.15s ease-in-out;
+} /* }}} */
 
 /* All the other modules */
+#tray,
+#workspaces,
+#window,
 #custom-lock,
 #custom-reboot,
 #custom-power,
 #network,
 #bluetooth,
 #pulseaudio,
-#custom-temperature,
+#temperature,
 #memory,
 #cpu,
 #clock {
-  background-color: @surface;
-  margin: 6px 0 0 0;   /* top 6px, sides 4px */
-  padding: 4px 10px;
-}
-
-/* Corner rounding for end modules */
-#clock,
-#custom-power {
-  border-radius: 0 10px 10px 0;
-}
-#network,
-#custom-lock {
-  border-radius: 10px 0 0 10px;
+  padding: 4px 8px;
 }
 
 /* Per-module text colors */

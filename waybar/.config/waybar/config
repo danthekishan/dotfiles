@@ -3,7 +3,6 @@
   "position": "top",
   "height": 32,
   "spacing": 0,
-
   "modules-left": [
     "hyprland/workspaces",
     "tray",
@@ -13,20 +12,23 @@
   ],
   "modules-center": ["hyprland/window"],
   "modules-right": [
-    "network",
-    "bluetooth",
-    "pulseaudio",
-    "custom/temperature",
-    "memory",
     "cpu",
+    "temperature",
+    "memory",
+    "network",
+    "pulseaudio#input",
+    "pulseaudio#output",
     "clock"
   ],
 
+  // Enhanced workspaces with special workspace support
   "hyprland/workspaces": {
-    "disable-scroll": false,
-    "all-outputs": true,
+    "disable-scroll-wraparound": true,
+    "smooth-scrolling-threshold": 4,
+    "enable-bar-scroll": true,
     "format": "{icon}",
-    "on-click": "activate",
+    "show-special": true,
+    "special-visible-only": false,
     "persistent-workspaces": {
       "*": [1,2,3,4,5,6,7,8,9]
     },
@@ -42,6 +44,120 @@
       "9": "󰖳",
       "default": ""
     }
+  },
+
+  // Individual storage modules
+  "memory": {
+    "interval": 4,
+    "format": " {percentage}%",
+    "states": {
+      "warning": 80,
+      "critical": 95
+    },
+    "tooltip": "{}",
+    "tooltip-format": "{used}/{total} GiB"
+  },
+
+  // Enhanced window title with icon
+  "hyprland/window": {
+    "format": "{title}",
+    "max-length": 48,
+    "tooltip": false,
+    "icon": true,
+    "icon-size": 18
+  },
+
+  // Enhanced network with bandwidth info
+  "network": {
+    "interval": 2,
+    "format": "󱘖 Offline",
+    "format-wifi": "󰤨 {essid} 󰇚 {bandwidthDownBits}",
+    "format-ethernet": "󰈀 Wired 󰇚 {bandwidthDownBits}",
+    "format-linked": "󱘖 {ifname} (No IP)",
+    "format-disconnected": "󰤭 Disconnected",
+    "tooltip-format-wifi": "{ifname}\n{essid}\n{signalStrength}%\n{frequency} GHz\n󰇚 {bandwidthDownBits}\n󰕒 {bandwidthUpBits}",
+    "tooltip-format-ethernet": "{ifname}\n󰇚 {bandwidthDownBits}\n󰕒 {bandwidthUpBits}",
+    "on-click": "nm-connection-editor & aplay ~/.config/sounds/interact.wav"
+  },
+
+  // Split audio modules for input/output
+  "pulseaudio#output": {
+    "format": "{icon} {volume}%",
+    "format-bluetooth": "{icon} {volume}%",
+    "format-muted": "󰖁 0%",
+    "format-icons": {
+      "headphone": "",
+      "hands-free": "",
+      "headset": "",
+      "phone": "",
+      "portable": "",
+      "car": "",
+      "default": ["", ""]
+    },
+    "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+    "on-click-right": "pavucontrol & aplay ~/.config/sounds/interact.wav",
+    "tooltip": true,
+    "tooltip-format": "Output Volume: {volume}%",
+    "scroll-step": 5
+  },
+
+  "pulseaudio#input": {
+    "format": " {format_source}%",
+    "format-source": "{volume}",
+    "format-source-muted": "󰍭 0%",
+    "on-scroll-up": "pactl set-source-volume @DEFAULT_SOURCE@ +5%",
+    "on-scroll-down": "pactl set-source-volume @DEFAULT_SOURCE@ -5%",
+    "max-volume": 100,
+    "on-click": "pactl set-source-mute @DEFAULT_SOURCE@ toggle",
+    "on-click-right": "pavucontrol & aplay ~/.config/sounds/interact.wav",
+    "tooltip": true,
+    "tooltip-format": "Input: {source_desc} - {volume}%"
+  },
+
+  // Enhanced temperature with better formatting
+  "temperature": {
+    "critical-threshold": 90,
+    "interval": 4,
+    "format": "{icon} {temperatureC}°",
+    "format-icons": ["", "", "", "", ""],
+    "tooltip": true,
+    "tooltip-format": "CPU Temperature: {temperatureC}°C"
+  },
+
+  "cpu": {
+    "interval": 4,
+    "format": " {usage}%",
+    "states": {
+      "warning": 80,
+      "critical": 95
+    },
+    "tooltip": true,
+    "tooltip-format": "CPU Usage: {usage}%"
+  },
+
+  "clock": {
+    "interval": 1,
+    "format": " {:%H:%M:%S    %d|%m}",
+    "tooltip-format": "{:%d.%m.%Y   Week %W}\n\n<tt><small>{calendar}</small></tt>",
+    "calendar": {
+      "mode": "month",
+      "mode-mon-col": 3,
+      "weeks-pos": "right",
+      "on-scroll": 1,
+      "format": {
+        "months": "<span color='#c4a7e7'><b>{}</b></span>",
+        "days": "<span color='#e0def4'><b>{}</b></span>",
+        "weeks": "<span color='#9ccfd8'> W{}</span>",
+        "weekdays": "<span color='#f6c177'><b>{}</b></span>",
+        "today": "<span color='#ebbcba'><b><u>{}</u></b></span>"
+      }
+    },
+    "on-click": "chromium --app=https://calendar.google.com & aplay ~/.config/sounds/interact.wav"
+  },
+
+  "tray": {
+    "icon-size": 17,
+    "spacing": 6
   },
 
   "custom/lock": {
@@ -62,63 +178,4 @@
     "tooltip": true,
     "tooltip-format": "Power"
   },
-
-  "network": {
-    "format-wifi": "󰤨 {essid}",
-    "format-ethernet": " Wired",
-    "format-linked": "󱘖 {ifname} (No IP)",
-    "format-disconnected": " Disconnected",
-    "format-alt": "󰤨 {signalStrength}%",
-    "tooltip-format": "󰅧 {bandwidthUpBytes}  󰅢 {bandwidthDownBytes}",
-    "interval": 1
-  },
-
-  "pulseaudio": {
-    "format": "{icon} {volume}%",
-    "format-muted": "󰖁 0%",
-    "on-click": "pactl -- set-sink-mute 0 toggle",
-    "tooltip": true,
-    "tooltip-format": "Vol: {volume}%"
-  },
-
-  "custom/temperature": {
-    "exec": "sensors | awk '/^Package id 0:/ {print int($4)}'",
-    "format": " {}°C",
-    "interval": 5,
-    "tooltip": true,
-    "tooltip-format": "Temp CPU: {}°C"
-  },
-
-  "memory": {
-    "format": " {used:0.1f}G/{total:0.1f}G",
-    "tooltip": true
-  },
-
-  "cpu": {
-    "format": " {usage}%",
-    "tooltip": true
-  },
-
-  "clock": {
-    "interval": 1,
-    "timezone": "Asia/Colombo",
-    "format": " {:%H:%M}",
-    "tooltip": true,
-    "tooltip-format": "{:L%Y %m %d, %A}"
-  },
-
-  "tray": {
-    "icon-size": 17,
-    "spacing": 6
-  },
-
-  "bluetooth": {
-    "format": " {status}",
-    "format-connected": " {device_alias}",
-    "format-connected-battery": " {device_alias}{device_battery_percentage}%",
-    "tooltip-format": "{controller_alias} {controller_address}\n{num_connections} connected",
-    "tooltip-format-connected": "{controller_alias} {controller_address}\n{num_connections} connected\n{device_enumerate}",
-    "tooltip-format-enumerate-connected": "{device_alias} {device_address}",
-    "tooltip-format-enumerate-connected-battery": "{device_alias} {device_address} {device_battery_percentage}%"
-  }
 }
