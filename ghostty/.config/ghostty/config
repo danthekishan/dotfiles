@@ -3,7 +3,7 @@ background = #000000
 background-opacity = 0.80
 background-blur-radius = 40
 
-font-family = JetBrains Mono
+font-family = JetBrainsMono Nerd Font Propo
 font-size = 16
 cursor-style = block
 cursor-style-blink = false

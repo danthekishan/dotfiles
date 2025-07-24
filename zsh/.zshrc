@@ -88,6 +88,9 @@ export NVM_DIR="$HOME/.nvm"
 ### SETTING THE STARSHIP PROMPT ###
 eval "$(starship init zsh)"
 
+### exports
+export PATH=$PATH:/usr/local/go/bin
+
 # . "$HOME/.local/bin/env"
 
 # Enable vi mode

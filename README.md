@@ -29,7 +29,7 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-m
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 
 # Arch-based
-sudo pacman -S zsh hyprland wofi waybar stow git eza ghostty zellij lazygit
+sudo pacman -S zsh hyprland wofi waybar stow git eza ghostty zellij lazygit wl-clipboard
 yay -S hyprshot swaync hyprlock hypridle hyprpaper starship
 
 # fzf and fd
@@ -40,8 +40,7 @@ yay -S nwg-look
 yay -Sy catppuccin-gtk-theme-mocha
 
 # fonts
-yay -S ttf-jetbrains-mono
-sudo pacman -S ttf-font-awesome ttf-nerd-fonts-symbols
+yay -S ttf-jetbrains-mono ttf-font-awesome noto-fonts-emoji ttf-nerd-fonts-symbols
 
 # Starting ssh agents
 systemctl --user enable ssh-agent

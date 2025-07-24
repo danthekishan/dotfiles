@@ -49,7 +49,7 @@
   // Individual storage modules
   "memory": {
     "interval": 4,
-    "format": " {percentage}%",
+    "format": " {percentage}%",
     "states": {
       "warning": 80,
       "critical": 95
@@ -71,8 +71,8 @@
   "network": {
     "interval": 2,
     "format": "󱘖 Offline",
-    "format-wifi": "󰤨 {essid} 󰇚 {bandwidthDownBits}",
-    "format-ethernet": "󰈀 Wired 󰇚 {bandwidthDownBits}",
+    "format-wifi": "󰤨 {essid}",
+    "format-ethernet": "󰈀 Wired",
     "format-linked": "󱘖 {ifname} (No IP)",
     "format-disconnected": "󰤭 Disconnected",
     "tooltip-format-wifi": "{ifname}\n{essid}\n{signalStrength}%\n{frequency} GHz\n󰇚 {bandwidthDownBits}\n󰕒 {bandwidthUpBits}",
